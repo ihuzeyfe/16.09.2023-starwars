@@ -111,7 +111,6 @@ const starWars = [
     id: 20,
     name: "Yoda",
     pic: "https://vignette.wikia.nocookie.net/starwars/images/d/d6/Yoda_SWSB.png",
-    homeworld: " ",
   },
   {
     id: 21,
@@ -120,6 +119,10 @@ const starWars = [
     homeworld: "naboo",
   },
 ];
+
+
+
+
 
 let isCharactersVisible = false;
 
@@ -166,3 +169,30 @@ function color() {
     colorbtn.style.color = "black";
   }
 }
+
+
+// 2. BÖLÜM
+
+
+const homeworlds = starWars.map(character => character.homeworld );
+
+console.log(homeworlds);
+
+for (let i = 0; i < homeworlds.length; i++) {
+  if (homeworlds[i] === undefined) {
+    homeworlds[i] = 'other';
+  }
+}
+
+const homeworldsUnique = [...new Set(homeworlds)];
+
+console.log(homeworldsUnique);
+
+
+
+const lowerCased= homeworldsUnique.map(word => word.toLowerCase());
+
+console.log(lowerCased);
+
+
+const homeWorldEarth = lowerCased;
