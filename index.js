@@ -148,7 +148,7 @@ function toggleCharacters() {
       nameElement.textContent = `Name: ${character.name}`;
 
       const homeworldElement = document.createElement("p");
-      homeworldElement.textContent = `Homeworld: ${character.homeworld}`;
+      homeworldElement.textContent = `${character.homeworld}`;
 
       characterDiv.appendChild(imgElement);
       characterDiv.appendChild(nameElement);
@@ -176,7 +176,7 @@ function color() {
 
 const homeworlds = starWars.map(character => character.homeworld );
 
-console.log(homeworlds);
+//console.log(homeworlds);
 
 for (let i = 0; i < homeworlds.length; i++) {
   if (homeworlds[i] === undefined) {
@@ -186,13 +186,56 @@ for (let i = 0; i < homeworlds.length; i++) {
 
 const homeworldsUnique = [...new Set(homeworlds)];
 
-console.log(homeworldsUnique);
+//console.log(homeworldsUnique);
 
 
 
 const lowerCased= homeworldsUnique.map(word => word.toLowerCase());
 
-console.log(lowerCased);
+//console.log(lowerCased);
 
 
 const homeWorldEarth = lowerCased;
+
+function radioHomeworld (){
+
+  const divRadio = document.getElementById("divsRadio");
+
+  for (i=0; i< homeWorldEarth.length; i++) {
+    const arraysHomeWorld = homeWorldEarth[i];
+
+    const radioDiv = document.createElement("div");
+      radioDiv.classList.add("character");
+
+    const radioInput = document.createElement("input");
+    radioInput.classList.add("form-check");
+    radioInput.value = arraysHomeWorld;
+    radioInput.type = "radio"
+    radioInput.name ="homeworld"
+
+    const radioLabel = document.createElement("label");
+    radioLabel.classList.add("label");
+    radioLabel.textContent = `${arraysHomeWorld}`;
+    radioLabel.htmlFor = "homeworld - " + `${arraysHomeWorld}`;
+    radioLabel.addEventListener('click', radioClick);
+
+
+    radioDiv.appendChild(radioLabel);
+    radioDiv.appendChild(radioInput);
+
+    divRadio.appendChild(radioDiv);
+
+  }
+}
+
+radioHomeworld();
+
+ function radioClick (){
+
+  if(homeworldElement.textContent !==  radioLabel.textContent  ){
+    document.getElementById("character").style.display = "none";
+  }
+} 
+
+
+

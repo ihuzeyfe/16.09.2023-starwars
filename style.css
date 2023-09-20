@@ -50,3 +50,20 @@ p {
     justify-content: center;
     margin: 3rem;
 }
+
+
+
+#divsRadio {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    padding: 1rem;
+}
+
+.hidden{
+    display: none;
+}
