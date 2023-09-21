@@ -120,14 +120,11 @@ const starWars = [
   },
 ];
 
-
-
-
-
 let isCharactersVisible = false;
 
 function toggleCharacters() {
   const container = document.getElementById("characters-container");
+  container.classList.add("container");
   const button = document.getElementById("toggleButton");
 
   if (isCharactersVisible) {
@@ -170,17 +167,15 @@ function color() {
   }
 }
 
-
 // 2. BÖLÜM
 
-
-const homeworlds = starWars.map(character => character.homeworld );
+const homeworlds = starWars.map((character) => character.homeworld);
 
 //console.log(homeworlds);
 
 for (let i = 0; i < homeworlds.length; i++) {
   if (homeworlds[i] === undefined) {
-    homeworlds[i] = 'other';
+    homeworlds[i] = "other";
   }
 }
 
@@ -188,54 +183,90 @@ const homeworldsUnique = [...new Set(homeworlds)];
 
 //console.log(homeworldsUnique);
 
-
-
-const lowerCased= homeworldsUnique.map(word => word.toLowerCase());
+const lowerCased = homeworldsUnique.map((word) => word.toLowerCase());
 
 //console.log(lowerCased);
 
-
 const homeWorldEarth = lowerCased;
 
-function radioHomeworld (){
-
+function radioHomeworld() {
   const divRadio = document.getElementById("divsRadio");
 
-  for (i=0; i< homeWorldEarth.length; i++) {
+  for (let i = 0; i < homeWorldEarth.length; i++) {
     const arraysHomeWorld = homeWorldEarth[i];
 
     const radioDiv = document.createElement("div");
-      radioDiv.classList.add("character");
+    radioDiv.classList.add("character" );
 
     const radioInput = document.createElement("input");
     radioInput.classList.add("form-check");
     radioInput.value = arraysHomeWorld;
-    radioInput.type = "radio"
-    radioInput.name ="homeworld"
+    radioInput.type = "radio";
+    radioInput.name = "homeworld";
+    radioInput.addEventListener('click', function () {
+      filterSelection(c); // Call toggleCharacters with selected homeworld
+    });
 
     const radioLabel = document.createElement("label");
     radioLabel.classList.add("label");
     radioLabel.textContent = `${arraysHomeWorld}`;
     radioLabel.htmlFor = "homeworld - " + `${arraysHomeWorld}`;
-    radioLabel.addEventListener('click', radioClick);
-
 
     radioDiv.appendChild(radioLabel);
     radioDiv.appendChild(radioInput);
 
     divRadio.appendChild(radioDiv);
-
   }
 }
 
 radioHomeworld();
 
- function radioClick (){
-
-  if(homeworldElement.textContent !==  radioLabel.textContent  ){
-    document.getElementById("character").style.display = "none";
+filterSelection("all");
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("character");
+  if (c == "all") c = "";
+  // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
   }
-} 
+}
 
+// Show filtered elements
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {
+      element.className += " " + arr2[i];
+    }
+  }
+}
+
+// Hide elements that are not selected
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);
+    }
+  }
+  element.className = arr1.join(" ");
+}
+
+// Add active class to the current control button (highlight it)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
 
 

@@ -67,3 +67,16 @@ label {
 .hidden{
     display: none;
 }
+
+.allHomeworld {
+    padding: 1rem;
+    margin: 1rem;
+    background-color: antiquewhite;
+    display: flex;
+    width: 7rem;
+}
+
+.newAll{
+    display: flex;
+    justify-content: center;
+}
